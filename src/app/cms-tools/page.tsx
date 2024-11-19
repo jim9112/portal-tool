@@ -1,3 +1,5 @@
+'use client';
+import { copyCmsPages } from '../actions/cms-copy';
 export default function Page() {
   return (
     <div>
@@ -52,7 +54,13 @@ export default function Page() {
             </label>
           </div>
         </div>
-        <button className='btn btn-outline btn-primary' type='submit'>
+        <button
+          className='btn btn-outline btn-primary'
+          onClick={(e) => {
+            e.preventDefault();
+            copyCmsPages();
+          }}
+        >
           Get pages
         </button>
       </form>
