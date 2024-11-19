@@ -26,7 +26,7 @@ export default function Page() {
             </label>
             <input
               type='text'
-              placeholder='Type here'
+              placeholder='Portal Private App Key'
               className='input input-bordered w-full max-w-xs'
               name='fromPortal'
               id='fromPortal'
@@ -38,7 +38,7 @@ export default function Page() {
             </label>
             <input
               type='text'
-              placeholder='Type here'
+              placeholder='Portal Private App Key'
               className='input input-bordered w-full max-w-xs'
               name='toPortal'
               id='toPortal'

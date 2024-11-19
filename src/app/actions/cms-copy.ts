@@ -6,7 +6,7 @@ interface RequestOptions {
   redirect?: RequestRedirect | undefined;
 }
 // To do: single page options
-export const getAllPages = async (
+const getAllPages = async (
   token: string,
   allDraft: boolean,
   sitePage: boolean
@@ -40,7 +40,7 @@ export const getAllPages = async (
   return modifiedData;
 };
 
-export const addPages = async (token: string, pages: [], sitePage: boolean) => {
+const addPages = async (token: string, pages: [], sitePage: boolean) => {
   const pageType = sitePage ? 'site-pages' : 'landing-pages';
   const raw = JSON.stringify({
     inputs: pages,
