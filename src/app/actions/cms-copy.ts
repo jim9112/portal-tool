@@ -63,17 +63,12 @@ export const addPages = async (token: string, pages: [], sitePage: boolean) => {
 };
 
 export async function copyCmsPages(formData: FormData) {
-  const data = {
-    fromPortal: formData.get('fromPortal') || null,
-    toPortal: formData.get('toPortal') || null,
-    allDraft: formData.get('allDraft') ? true : false,
-    sitePage: formData.get('sitePage') ? true : false,
-  };
-  // Code to copy CMS content
-  // const {tokenOne, tokenTwo, allDraft, sitePage} = await request.json();
-  // const data = await getAllPages(tokenOne, allDraft, sitePage);
-  // const message = await addPages(tokenTwo, data, sitePage);
-  // return json(message);
-  // formData.get('fromPortal');
-  console.log(data);
+  const tokenOne: any = formData.get('fromPortal');
+  const tokenTwo: any = formData.get('toPortal');
+  const allDraft = formData.get('allDraft') ? true : false;
+  const sitePage = formData.get('sitePage') ? true : false;
+
+  const data = await getAllPages(tokenOne, allDraft, sitePage);
+  const message = await addPages(tokenTwo, data, sitePage);
+  console.log(message);
 }
