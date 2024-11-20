@@ -27,6 +27,7 @@ export default function Page() {
               From Portal
             </label>
             <input
+              required
               type='text'
               placeholder='Portal Private App Key'
               className='input input-bordered w-full max-w-xs'
@@ -39,6 +40,7 @@ export default function Page() {
               To Portal
             </label>
             <input
+              required
               type='text'
               placeholder='Portal Private App Key'
               className='input input-bordered w-full max-w-xs'
@@ -61,11 +63,7 @@ export default function Page() {
             </label>
           </div>
         </div>
-        <button
-          disabled={pending}
-          className='btn btn-outline btn-primary'
-          type='submit'
-        >
+        <button disabled={pending} className='btn btn-outline btn-primary'>
           Get pages
         </button>
       </form>

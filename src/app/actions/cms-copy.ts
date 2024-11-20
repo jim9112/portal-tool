@@ -18,26 +18,19 @@ const getAllPages = async (
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await fetch(
-    `https://api.hubapi.com/cms/v3/pages/${pageType}`,
-    requestOptions
-  );
-  const data = await response.json();
-  const modifiedData = data.results.map(
-    (page: {
-      archivedAt: string | undefined;
-      state: string;
-      publishImmediately: boolean;
-    }) => {
-      const pageCopy = { ...page };
-      delete pageCopy.archivedAt;
-      if (allDraft) {
-        pageCopy.state = 'DRAFT';
-      }
-      return pageCopy;
+  try {
+    const response = await fetch(
+      `https://api.hubapi.com/cms/v3/pages/${pageType}`,
+      requestOptions
+    );
+    if (!response.ok) {
+      throw new Error(`Oh No! status: ${response.status}`);
     }
-  );
-  return modifiedData;
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const addPages = async (token: string, pages: [], sitePage: boolean) => {
@@ -69,6 +62,24 @@ export async function copyCmsPages(formData: FormData) {
   const sitePage = formData.get('sitePage') ? true : false;
 
   const data = await getAllPages(tokenOne, allDraft, sitePage);
-  const message = await addPages(tokenTwo, data, sitePage);
-  console.log(message);
+  if (data) {
+    const modifiedData = data.results.map(
+      (page: {
+        archivedAt: string | undefined;
+        state: string;
+        publishImmediately: boolean;
+      }) => {
+        const pageCopy = { ...page };
+        delete pageCopy.archivedAt;
+        if (allDraft) {
+          pageCopy.state = 'DRAFT';
+        }
+        return pageCopy;
+      }
+    );
+    const message = await addPages(tokenTwo, modifiedData, sitePage);
+    console.log('success');
+  } else {
+    console.log('No data found');
+  }
 }
