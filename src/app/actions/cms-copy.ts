@@ -79,8 +79,10 @@ export async function copyCmsPages(prevState: any, formData: FormData) {
       }
     );
     const message = await addPages(tokenTwo, modifiedData, sitePage);
-    return message ? { message: 'success' } : { error: 'No message found' };
+    return message
+      ? { message: 'success' }
+      : { error: 'There was a problem with your request, check console' };
   } else {
-    return { error: 'No data found' };
+    return { error: 'There was a problem with your request, check console' };
   }
 }
