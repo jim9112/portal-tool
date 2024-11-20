@@ -1,7 +1,5 @@
 'use server';
 
-import { error } from 'console';
-
 interface RequestOptions {
   method: string;
   headers: {};
