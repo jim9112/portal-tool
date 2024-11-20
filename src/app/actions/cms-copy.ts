@@ -63,8 +63,8 @@ const addPages = async (token: string, pages: [], sitePage: boolean) => {
 };
 
 export async function copyCmsPages(formData: FormData) {
-  const tokenOne: any = formData.get('fromPortal');
-  const tokenTwo: any = formData.get('toPortal');
+  const tokenOne = formData.get('fromPortal') as string;
+  const tokenTwo = formData.get('toPortal') as string;
   const allDraft = formData.get('allDraft') ? true : false;
   const sitePage = formData.get('sitePage') ? true : false;
 

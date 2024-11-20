@@ -1,9 +1,11 @@
 'use client';
+import { useFormStatus } from 'react-dom';
 import { copyCmsPages } from '../actions/cms-copy';
 export default function Page() {
+  const { pending } = useFormStatus();
   return (
-    <div>
-      <h1>CMS Tools</h1>
+    <div className='container mx-auto font-body pt-20'>
+      <h1 className='text-3xl font-heading text-center mb-10'>CMS Tools</h1>
       <form action={copyCmsPages} className='flex flex-col items-center gap-2'>
         <div className='flex mb-3 justify-evenly'>
           <div className='form-control'>
@@ -59,7 +61,11 @@ export default function Page() {
             </label>
           </div>
         </div>
-        <button className='btn btn-outline btn-primary' type='submit'>
+        <button
+          disabled={pending}
+          className='btn btn-outline btn-primary'
+          type='submit'
+        >
           Get pages
         </button>
       </form>
