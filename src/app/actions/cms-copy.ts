@@ -1,4 +1,7 @@
 'use server';
+
+import { error } from 'console';
+
 interface RequestOptions {
   method: string;
   headers: {};
@@ -55,7 +58,7 @@ const addPages = async (token: string, pages: [], sitePage: boolean) => {
   return message;
 };
 
-export async function copyCmsPages(formData: FormData) {
+export async function copyCmsPages(prevState: any, formData: FormData) {
   const tokenOne = formData.get('fromPortal') as string;
   const tokenTwo = formData.get('toPortal') as string;
   const allDraft = formData.get('allDraft') ? true : false;
@@ -78,8 +81,8 @@ export async function copyCmsPages(formData: FormData) {
       }
     );
     const message = await addPages(tokenTwo, modifiedData, sitePage);
-    console.log('success');
+    return message ? { message: 'success' } : { error: 'No message found' };
   } else {
-    console.log('No data found');
+    return { error: 'No data found' };
   }
 }
