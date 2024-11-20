@@ -1,4 +1,4 @@
-# Port Tools for HubSpot
+# Portal Tools for HubSpot
 This app copies website pages and landing pages from one HubSpot portal to another. In order to use it you will need to create a private app in each portal with "content" scopes and have the private app keys available  
 
 ## Getting Started
