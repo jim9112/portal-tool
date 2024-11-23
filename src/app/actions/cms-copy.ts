@@ -47,12 +47,23 @@ const addPages = async (token: string, pages: [], sitePage: boolean) => {
     body: raw,
     redirect: 'follow',
   };
-  const response = await fetch(
-    `https://api.hubapi.com/cms/v3/pages/${pageType}/batch/create`,
-    requestOptions
-  );
-  const message = await response.text();
-  return message;
+  try {
+    const response = await fetch(
+      `https://api.hubapi.com/cms/v3/pages/${pageType}/batch/create`,
+      requestOptions
+    );
+    if (!response.ok) {
+      throw new Error(`Oh No! status: ${response.status}`);
+    }
+    const message = await response.text();
+    return message;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    } else {
+      console.log('An unknown error occurred');
+    }
+  }
 };
 
 export async function copyCmsPages(prevState: any, formData: FormData) {

@@ -1,4 +1,10 @@
-export default function Modal({ children }) {
+import { ReactNode } from 'react';
+
+interface ModalProps {
+  children: ReactNode;
+}
+
+export default function Modal({ children }: ModalProps) {
   return (
     <div
       className='relative z-10'
