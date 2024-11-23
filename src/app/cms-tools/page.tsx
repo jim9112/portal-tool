@@ -1,14 +1,17 @@
 'use client';
-import { useFormStatus, useFormState } from 'react-dom';
 import { copyCmsPages } from '../actions/cms-copy';
+import { useActionState } from 'react';
+import Modal from '../components/Modal';
 
 const initialState = {
   message: '',
   error: '',
 };
 export default function Page() {
-  const [state, formAction] = useFormState(copyCmsPages, initialState);
-  const { pending } = useFormStatus();
+  const [state, formAction, isPending] = useActionState(
+    copyCmsPages,
+    initialState
+  );
   return (
     <div className='container mx-auto font-body pt-20'>
       <h1 className='text-3xl font-heading text-center mb-10'>CMS Tools</h1>
@@ -69,18 +72,24 @@ export default function Page() {
             </label>
           </div>
         </div>
-        <button disabled={pending} className='btn btn-outline btn-primary'>
+        <button disabled={isPending} className='btn btn-outline btn-primary'>
           Get pages
         </button>
       </form>
       <div>
         {state?.error && (
-          <div className='text-center text-red-500 mt-4'>{state.error}</div>
+          <div className='text-center text-error mt-4'>{state.error}</div>
         )}
         {state?.message && (
-          <div className='text-center text-green-500 mt-4'>{state.message}</div>
+          <div className='text-center text-success mt-4'>{state.message}</div>
         )}
       </div>
+      {isPending && (
+        <Modal>
+          <span className='loading loading-spinner loading-lg text-info'></span>
+          <p className='text-primary text-lg'>We are working on your request</p>
+        </Modal>
+      )}
     </div>
   );
 }
