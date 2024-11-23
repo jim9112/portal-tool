@@ -1,5 +1,4 @@
 'use server';
-
 interface RequestOptions {
   method: string;
   headers: {};
@@ -7,11 +6,7 @@ interface RequestOptions {
   redirect?: RequestRedirect | undefined;
 }
 // To do: single page options
-const getAllPages = async (
-  token: string,
-  allDraft: boolean,
-  sitePage: boolean
-) => {
+const getAllPages = async (token: string, sitePage: boolean) => {
   const pageType = sitePage ? 'site-pages' : 'landing-pages';
   const requestOptions: RequestOptions = {
     method: 'GET',
@@ -30,7 +25,11 @@ const getAllPages = async (
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) {
+      console.log(error.message);
+    } else {
+      console.log('An unknown error occurred');
+    }
   }
 };
 
@@ -62,7 +61,7 @@ export async function copyCmsPages(prevState: any, formData: FormData) {
   const allDraft = formData.get('allDraft') ? true : false;
   const sitePage = formData.get('sitePage') ? true : false;
 
-  const data = await getAllPages(tokenOne, allDraft, sitePage);
+  const data = await getAllPages(tokenOne, allDraft);
   if (data) {
     const modifiedData = data.results.map(
       (page: {
@@ -80,9 +79,15 @@ export async function copyCmsPages(prevState: any, formData: FormData) {
     );
     const message = await addPages(tokenTwo, modifiedData, sitePage);
     return message
-      ? { message: 'success' }
-      : { error: 'There was a problem with your request, check console' };
+      ? { message: 'success', error: '' }
+      : {
+          error: 'There was a problem with your request, check console',
+          message: '',
+        };
   } else {
-    return { error: 'There was a problem with your request, check console' };
+    return {
+      error: 'There was a problem with your request, check console',
+      message: '',
+    };
   }
 }
