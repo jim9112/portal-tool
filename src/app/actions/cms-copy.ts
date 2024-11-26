@@ -91,7 +91,6 @@ export async function copyCmsPages(prevState: any, formData: FormData) {
       }
     );
     const message = await addPages(tokenTwo, modifiedData, sitePage);
-    console.log(message);
     return message
       ? { message: 'success', error: '' }
       : {
