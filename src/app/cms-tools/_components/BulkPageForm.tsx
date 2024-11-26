@@ -57,7 +57,7 @@ export default function BulkPageForm({
           >
             <span className='label-text'> Import all as draft </span>
             <input
-              className='checkbox checkbox-primary'
+              className='checkbox mt-3'
               type='checkbox'
               name='allDraft'
               id='allDraft'
@@ -65,7 +65,7 @@ export default function BulkPageForm({
           </label>
         </div>
       </div>
-      <button disabled={isPending} className='btn btn-outline btn-primary'>
+      <button disabled={isPending} className='btn btn-primary mt-3'>
         Get pages
       </button>
     </form>

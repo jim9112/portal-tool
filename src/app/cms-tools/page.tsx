@@ -1,8 +1,9 @@
 'use client';
-import { copyCmsPages } from '../actions/cms-copy';
+import { copyCmsPages, getAllPages } from '../actions/cms-copy';
 import { useActionState } from 'react';
 import Modal from '../components/Modal';
 import BulkPageForm from './_components/BulkPageForm';
+import GetPagesForm from './_components/GetPagesForm';
 
 const initialState = {
   message: '',
@@ -14,10 +15,6 @@ export default function Page() {
     initialState
   );
 
-  const getPageList = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log('get page list');
-  };
   return (
     <div className='container mx-auto font-body pt-20'>
       <h1 className='text-3xl font-heading text-center mb-10'>CMS Tools</h1>
@@ -48,27 +45,7 @@ export default function Page() {
           role='tabpanel'
           className='tab-content bg-base-100 border-base-300 rounded-box p-6'
         >
-          <form
-            className='flex justify-evenly items-end'
-            onSubmit={getPageList}
-          >
-            <div className='flex flex-col'>
-              <label className='text-left label-text' htmlFor='toPortal'>
-                Get page list from original portal
-              </label>
-              <input
-                required
-                type='text'
-                placeholder='Portal Private App Key'
-                className='input input-bordered w-full max-w-xs'
-                name='fromPortal'
-                id='fromPortal'
-              />
-            </div>
-            <div className='flex justify-center gap-4'>
-              <button className='btn btn-primary'>Get Page List</button>
-            </div>
-          </form>
+          <GetPagesForm />
         </div>
       </div>
 

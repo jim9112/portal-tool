@@ -6,7 +6,7 @@ interface RequestOptions {
   redirect?: RequestRedirect | undefined;
 }
 // grab all pages from origin portal
-const getAllPages = async (token: string, sitePage: boolean) => {
+export const getAllPages = async (token: string, sitePage: boolean) => {
   const pageType = sitePage ? 'site-pages' : 'landing-pages';
   const requestOptions: RequestOptions = {
     method: 'GET',
@@ -34,7 +34,7 @@ const getAllPages = async (token: string, sitePage: boolean) => {
 };
 
 // add pages to destination portal
-const addPages = async (token: string, pages: [], sitePage: boolean) => {
+export const addPages = async (token: string, pages: [], sitePage: boolean) => {
   const pageType = sitePage ? 'site-pages' : 'landing-pages';
   const raw = JSON.stringify({
     inputs: pages,
