@@ -1,9 +1,15 @@
-export default function GetPagesForm() {
+import { useState } from 'react';
+
+interface GetPagesFormProps {
+  generatePageList: (portalKey: string) => void;
+}
+
+export default function GetPagesForm({ generatePageList }: GetPagesFormProps) {
+  const [portalKey, setPortalKey] = useState('');
   const getPageList = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('get page list');
+    generatePageList(portalKey);
   };
-
   return (
     <form className='flex justify-evenly items-end' onSubmit={getPageList}>
       <div className='flex flex-col'>
@@ -12,6 +18,7 @@ export default function GetPagesForm() {
         </label>
         <input
           required
+          onChange={(e) => setPortalKey(e.target.value)}
           type='text'
           placeholder='Portal Private App Key'
           className='input input-bordered w-full max-w-xs'

@@ -1,20 +1,25 @@
 'use client';
 import { copyCmsPages, getAllPages } from '../actions/cms-copy';
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 import Modal from '../components/Modal';
 import BulkPageForm from './_components/BulkPageForm';
 import GetPagesForm from './_components/GetPagesForm';
+import PagesTable from './_components/PagesTable';
 
 const initialState = {
   message: '',
   error: '',
 };
 export default function Page() {
+  const [sitePageList, setSitePageList] = useState([]);
   const [state, formAction, isPending] = useActionState(
     copyCmsPages,
     initialState
   );
-
+  const generatePageList = async (portalToken: string) => {
+    const siteData = await getAllPages(portalToken, true);
+    setSitePageList(siteData.results);
+  };
   return (
     <div className='container mx-auto font-body pt-20'>
       <h1 className='text-3xl font-heading text-center mb-10'>CMS Tools</h1>
@@ -45,7 +50,10 @@ export default function Page() {
           role='tabpanel'
           className='tab-content bg-base-100 border-base-300 rounded-box p-6'
         >
-          <GetPagesForm />
+          <GetPagesForm generatePageList={generatePageList} />
+          {sitePageList.length > 0 && (
+            <PagesTable sitePageList={sitePageList} />
+          )}
         </div>
       </div>
 
