@@ -23,6 +23,10 @@ export default function Page() {
     const lpData = await getAllPages(portalToken, false);
     setLpPageList(lpData.results);
   };
+  const clearResults = () => {
+    setSitePageList([]);
+    setLpPageList([]);
+  };
   return (
     <div className='container mx-auto font-body pt-20'>
       <h1 className='text-3xl font-heading text-center mb-10'>CMS Tools</h1>
@@ -31,13 +35,13 @@ export default function Page() {
           type='radio'
           name='my_tabs_2'
           role='tab'
-          className='tab !w-max'
+          className='tab [--tab-border-color:#A6ADBB] !w-max'
           aria-label='Bulk Pages Import'
           defaultChecked
         />
         <div
           role='tabpanel'
-          className='tab-content bg-base-100 border-base-300 rounded-box p-6'
+          className='tab-content bg-base-100 border-[#A6ADBB] rounded-box p-6'
         >
           <BulkPageForm formAction={formAction} isPending={isPending} />
         </div>
@@ -46,14 +50,23 @@ export default function Page() {
           type='radio'
           name='my_tabs_2'
           role='tab'
-          className='tab !w-max'
+          className='tab [--tab-border-color:#A6ADBB] !w-max'
           aria-label='Single Pages Import'
         />
         <div
           role='tabpanel'
-          className='tab-content bg-base-100 border-base-300 rounded-box p-6'
+          className='tab-content bg-base-100 border-[#A6ADBB] rounded-box p-6'
         >
-          <GetPagesForm generatePageList={generatePageList} />
+          {sitePageList.length > 0 && lpPageList.length > 0 && (
+            <div>
+              <button className='btn btn-accent' onClick={clearResults}>
+                Clear Results
+              </button>
+            </div>
+          )}
+          {!sitePageList.length && !lpPageList.length && (
+            <GetPagesForm generatePageList={generatePageList} />
+          )}
           {sitePageList.length > 0 && (
             <PagesTable title='Website Pages' sitePageList={sitePageList} />
           )}
