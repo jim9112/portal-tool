@@ -1,12 +1,14 @@
 import { useState } from 'react';
 interface PagesTableProps {
+  title: string;
   sitePageList: Array<any>;
 }
 
-export default function PagesTable({ sitePageList }: PagesTableProps) {
+export default function PagesTable({ title, sitePageList }: PagesTableProps) {
   const [allChecked, setAllChecked] = useState(false);
   return (
-    <div className='overflow-x-auto'>
+    <div className='overflow-x-auto mt-7'>
+      <h3 className='text-xl text-center'>{title}</h3>
       <table className='table'>
         {/* head */}
         <thead>

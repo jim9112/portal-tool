@@ -12,6 +12,7 @@ const initialState = {
 };
 export default function Page() {
   const [sitePageList, setSitePageList] = useState([]);
+  const [lpPageList, setLpPageList] = useState([]);
   const [state, formAction, isPending] = useActionState(
     copyCmsPages,
     initialState
@@ -19,6 +20,8 @@ export default function Page() {
   const generatePageList = async (portalToken: string) => {
     const siteData = await getAllPages(portalToken, true);
     setSitePageList(siteData.results);
+    const lpData = await getAllPages(portalToken, false);
+    setLpPageList(lpData.results);
   };
   return (
     <div className='container mx-auto font-body pt-20'>
@@ -28,7 +31,7 @@ export default function Page() {
           type='radio'
           name='my_tabs_2'
           role='tab'
-          className='tab'
+          className='tab !w-max'
           aria-label='Bulk Pages Import'
           defaultChecked
         />
@@ -43,7 +46,7 @@ export default function Page() {
           type='radio'
           name='my_tabs_2'
           role='tab'
-          className='tab'
+          className='tab !w-max'
           aria-label='Single Pages Import'
         />
         <div
@@ -52,7 +55,10 @@ export default function Page() {
         >
           <GetPagesForm generatePageList={generatePageList} />
           {sitePageList.length > 0 && (
-            <PagesTable sitePageList={sitePageList} />
+            <PagesTable title='Website Pages' sitePageList={sitePageList} />
+          )}
+          {lpPageList.length > 0 && (
+            <PagesTable title='Landing Pages' sitePageList={lpPageList} />
           )}
         </div>
       </div>
