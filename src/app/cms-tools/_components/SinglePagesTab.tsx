@@ -100,6 +100,7 @@ export default function SinglePagesTab() {
                 label='Destination Portal'
                 name='portalKey'
                 placeholder='Portal Private Key'
+                isRequired={true}
               />
               <CheckBox label='Import all as draft' name='allDraft' />
             </div>
