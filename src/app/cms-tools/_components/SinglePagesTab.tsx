@@ -6,6 +6,7 @@ import Modal from '@/app/components/Modal';
 import Input from '@/app/components/Input';
 import CheckBox from '@/app/components/CheckBox';
 import { addCmsPages } from '../../actions/cms-copy';
+import Loading from '@/app/components/Loading';
 
 const initialState = {
   message: '',
@@ -117,6 +118,7 @@ export default function SinglePagesTab() {
           </form>
         </Modal>
       )}
+      <Loading isPending={isPending} />
     </>
   );
 }

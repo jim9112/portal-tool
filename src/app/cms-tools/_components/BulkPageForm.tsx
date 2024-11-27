@@ -1,8 +1,8 @@
 import { copyCmsPages } from '@/app/actions/cms-copy';
 import { useActionState } from 'react';
-import Modal from '@/app/components/Modal';
 import Input from '@/app/components/Input';
 import CheckBox from '@/app/components/CheckBox';
+import Loading from '@/app/components/Loading';
 
 const initialState = {
   message: '',
@@ -55,12 +55,7 @@ export default function BulkPageForm() {
           <div className='text-center text-success mt-4'>{state.message}</div>
         )}
       </div>
-      {isPending && (
-        <Modal>
-          <span className='loading loading-spinner loading-lg text-info'></span>
-          <p className='text-primary text-lg'>We are working on your request</p>
-        </Modal>
-      )}
+      <Loading isPending={isPending} />
     </div>
   );
 }
