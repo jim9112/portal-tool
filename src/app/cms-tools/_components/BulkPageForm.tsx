@@ -35,11 +35,13 @@ export default function BulkPageForm() {
             label='From Portal'
             name='fromPortal'
             placeholder='Portal Private App Key'
+            isRequired={true}
           />
           <Input
             label='To Portal'
             name='toPortal'
             placeholder='Portal Private App Key'
+            isRequired={true}
           />
           <CheckBox label='Import all as draft' name='allDraft' />
         </div>
