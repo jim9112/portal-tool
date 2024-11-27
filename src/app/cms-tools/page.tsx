@@ -1,22 +1,14 @@
 'use client';
-import { copyCmsPages, getAllPages } from '../actions/cms-copy';
-import { useActionState, useState } from 'react';
-import Modal from '../components/Modal';
+import { getAllPages } from '../actions/cms-copy';
+import { useState } from 'react';
 import BulkPageForm from './_components/BulkPageForm';
 import GetPagesForm from './_components/GetPagesForm';
 import PagesTable from './_components/PagesTable';
 
-const initialState = {
-  message: '',
-  error: '',
-};
 export default function Page() {
   const [sitePageList, setSitePageList] = useState([]);
   const [lpPageList, setLpPageList] = useState([]);
-  const [state, formAction, isPending] = useActionState(
-    copyCmsPages,
-    initialState
-  );
+
   const generatePageList = async (portalToken: string) => {
     const siteData = await getAllPages(portalToken, true);
     setSitePageList(siteData.results);
@@ -43,7 +35,7 @@ export default function Page() {
           role='tabpanel'
           className='tab-content bg-base-100 border-[#A6ADBB] rounded-box p-6'
         >
-          <BulkPageForm formAction={formAction} isPending={isPending} />
+          <BulkPageForm />
         </div>
 
         <input
@@ -75,21 +67,6 @@ export default function Page() {
           )}
         </div>
       </div>
-
-      <div>
-        {state?.error && (
-          <div className='text-center text-error mt-4'>{state.error}</div>
-        )}
-        {state?.message && (
-          <div className='text-center text-success mt-4'>{state.message}</div>
-        )}
-      </div>
-      {isPending && (
-        <Modal>
-          <span className='loading loading-spinner loading-lg text-info'></span>
-          <p className='text-primary text-lg'>We are working on your request</p>
-        </Modal>
-      )}
     </div>
   );
 }
