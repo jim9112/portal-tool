@@ -1,11 +1,18 @@
 interface PagesTableProps {
   title: string;
   sitePageList: Array<any>;
+  triggerCopy: (page: { name: string }, sitePage: boolean) => void;
+  sitePage?: boolean;
 }
 
-export default function PagesTable({ title, sitePageList }: PagesTableProps) {
+export default function PagesTable({
+  title,
+  sitePageList,
+  triggerCopy,
+  sitePage = true,
+}: PagesTableProps) {
   const copySinglePage = (page: { name: string }) => {
-    console.log(page.name);
+    triggerCopy(page, sitePage);
   };
   return (
     <div className='overflow-x-auto mt-7'>

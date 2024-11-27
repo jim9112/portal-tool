@@ -104,3 +104,36 @@ export async function copyCmsPages(prevState: any, formData: FormData) {
     };
   }
 }
+
+// copy pages from one portal to another
+export async function addCmsPages(prevState: any, formData: FormData) {
+  const token = formData.get('portalKey') as string;
+  const allDraft = formData.get('allDraft') ? true : false;
+  const data = formData.get('data') as any;
+  const parsedData = JSON.parse(data);
+  const sitePage = formData.get('sitePage') === 'true' ? true : false;
+  console.log(sitePage);
+  const modifiedData = parsedData?.map(
+    (page: {
+      archivedAt: string | undefined;
+      state: string;
+      publishImmediately: boolean;
+    }) => {
+      const pageCopy = { ...page };
+      delete pageCopy.archivedAt;
+      if (allDraft) {
+        pageCopy.state = 'DRAFT';
+      }
+      return pageCopy;
+    }
+  );
+
+  const message = await addPages(token, modifiedData, sitePage);
+
+  return message
+    ? { message: 'success', error: '' }
+    : {
+        error: 'There was a problem with your request, check console',
+        message: '',
+      };
+}
