@@ -2,6 +2,7 @@ import { copyCmsPages } from '@/app/actions/cms-copy';
 import { useActionState } from 'react';
 import Modal from '@/app/components/Modal';
 import Input from '@/app/components/Input';
+import CheckBox from '@/app/components/CheckBox';
 
 const initialState = {
   message: '',
@@ -40,20 +41,7 @@ export default function BulkPageForm() {
             name='toPortal'
             placeholder='Portal Private App Key'
           />
-          <div className='form-control'>
-            <label
-              className='flex flex-col p-0 cursor-pointer label'
-              htmlFor='allDraft'
-            >
-              <span className='label-text'> Import all as draft </span>
-              <input
-                className='checkbox mt-3'
-                type='checkbox'
-                name='allDraft'
-                id='allDraft'
-              />
-            </label>
-          </div>
+          <CheckBox label='Import all as draft' name='allDraft' />
         </div>
         <button disabled={isPending} className='btn btn-primary mt-3'>
           Get pages

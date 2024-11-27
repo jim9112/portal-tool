@@ -4,11 +4,12 @@ import GetPagesForm from './GetPagesForm';
 import PagesTable from './PagesTable';
 import Modal from '@/app/components/Modal';
 import Input from '@/app/components/Input';
+import CheckBox from '@/app/components/CheckBox';
 
 export default function SinglePagesTab() {
   const [sitePageList, setSitePageList] = useState([]);
   const [lpPageList, setLpPageList] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const generatePageList = async (portalToken: string) => {
     const siteData = await getAllPages(portalToken, true);
     setSitePageList(siteData.results);
@@ -41,11 +42,14 @@ export default function SinglePagesTab() {
         <Modal>
           <h2>Test</h2>
           <form action=''>
-            <Input
-              label='Desination Portal'
-              name='portalKey'
-              placeholder='Portal Private Key'
-            />
+            <div className='flex gap-4'>
+              <Input
+                label='Destination Portal'
+                name='portalKey'
+                placeholder='Portal Private Key'
+              />
+              <CheckBox label='Import all as draft' name='allDraft' />
+            </div>
           </form>
         </Modal>
       )}

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 interface PagesTableProps {
   title: string;
   sitePageList: Array<any>;
