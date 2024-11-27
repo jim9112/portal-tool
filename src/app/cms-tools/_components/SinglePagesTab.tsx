@@ -76,7 +76,7 @@ export default function SinglePagesTab() {
       </div>
       {showModal && (
         <Modal>
-          <h2>Test</h2>
+          <h3 className='text-xl'>Copy Page to Portal</h3>
           <form action={formAction} onSubmit={() => setShowModal(false)}>
             <div className='flex gap-4'>
               <input
