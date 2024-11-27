@@ -1,6 +1,7 @@
 import { copyCmsPages } from '@/app/actions/cms-copy';
 import { useActionState } from 'react';
 import Modal from '@/app/components/Modal';
+import Input from '@/app/components/Input';
 
 const initialState = {
   message: '',
@@ -29,32 +30,16 @@ export default function BulkPageForm() {
           </div>
         </div>
         <div className='flex justify-center gap-4'>
-          <div className='flex flex-col'>
-            <label className='text-center label-text' htmlFor='fromPortal'>
-              From Portal
-            </label>
-            <input
-              required
-              type='text'
-              placeholder='Portal Private App Key'
-              className='input input-bordered w-full max-w-xs'
-              name='fromPortal'
-              id='fromPortal'
-            />
-          </div>
-          <div className='flex flex-col'>
-            <label className='text-center label-text' htmlFor='toPortal'>
-              To Portal
-            </label>
-            <input
-              required
-              type='text'
-              placeholder='Portal Private App Key'
-              className='input input-bordered w-full max-w-xs'
-              name='toPortal'
-              id='toPortal'
-            />
-          </div>
+          <Input
+            label='From Portal'
+            name='fromPortal'
+            placeholder='Portal Private App Key'
+          />
+          <Input
+            label='To Portal'
+            name='toPortal'
+            placeholder='Portal Private App Key'
+          />
           <div className='form-control'>
             <label
               className='flex flex-col p-0 cursor-pointer label'

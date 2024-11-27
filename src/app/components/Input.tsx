@@ -1,8 +1,11 @@
+import { on } from 'events';
+
 interface InputProps {
   label: string;
   type?: string;
   placeholder?: string;
   name: string;
+  onChangeCallback?: (e: any) => void;
 }
 
 export default function Input({
@@ -10,6 +13,7 @@ export default function Input({
   type = 'text',
   placeholder,
   name,
+  onChangeCallback,
 }: InputProps) {
   return (
     <div className='flex flex-col'>
@@ -23,6 +27,9 @@ export default function Input({
         className='input input-bordered w-full max-w-xs'
         name={name}
         id={name}
+        {...(onChangeCallback && {
+          onChange: onChangeCallback,
+        })}
       />
     </div>
   );

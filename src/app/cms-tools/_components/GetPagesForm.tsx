@@ -1,3 +1,4 @@
+import Input from '@/app/components/Input';
 import { useState } from 'react';
 
 interface GetPagesFormProps {
@@ -12,20 +13,12 @@ export default function GetPagesForm({ generatePageList }: GetPagesFormProps) {
   };
   return (
     <form className='flex justify-evenly items-end' onSubmit={getPageList}>
-      <div className='flex flex-col'>
-        <label className='text-left label-text' htmlFor='getAllFrom'>
-          Get page list from original portal
-        </label>
-        <input
-          required
-          onChange={(e) => setPortalKey(e.target.value)}
-          type='text'
-          placeholder='Portal Private App Key'
-          className='input input-bordered w-full max-w-xs'
-          name='getAllFrom'
-          id='getAllFrom'
-        />
-      </div>
+      <Input
+        label='Get page list from original portal'
+        name='portalKey'
+        placeholder='Portal Private Key'
+        onChangeCallback={(e) => setPortalKey(e.target.value)}
+      />
       <div className='flex justify-center gap-4'>
         <button className='btn btn-primary'>Get Page List</button>
       </div>
