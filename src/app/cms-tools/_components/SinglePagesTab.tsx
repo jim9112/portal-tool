@@ -35,7 +35,6 @@ export default function SinglePagesTab() {
     setPageData([page]);
     setSitePage(sitePage);
   };
-
   const clearResults = () => {
     setSitePageList([]);
     setLpPageList([]);
@@ -78,7 +77,7 @@ export default function SinglePagesTab() {
       {showModal && (
         <Modal>
           <h2>Test</h2>
-          <form action={formAction}>
+          <form action={formAction} onSubmit={() => setShowModal(false)}>
             <div className='flex gap-4'>
               <input
                 hidden

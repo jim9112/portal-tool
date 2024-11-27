@@ -112,7 +112,6 @@ export async function addCmsPages(prevState: any, formData: FormData) {
   const data = formData.get('data') as any;
   const parsedData = JSON.parse(data);
   const sitePage = formData.get('sitePage') === 'true' ? true : false;
-  console.log(sitePage);
   const modifiedData = parsedData?.map(
     (page: {
       archivedAt: string | undefined;
