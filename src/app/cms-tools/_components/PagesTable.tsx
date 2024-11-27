@@ -5,12 +5,9 @@ interface PagesTableProps {
 }
 
 export default function PagesTable({ title, sitePageList }: PagesTableProps) {
-  const [allChecked, setAllChecked] = useState(false);
-  const copySinglePage = (page: {
-    name: string,
-  }) => {
+  const copySinglePage = (page: { name: string }) => {
     console.log(page.name);
-  }
+  };
   return (
     <div className='overflow-x-auto mt-7'>
       <h3 className='text-xl text-center'>{title}</h3>
@@ -18,15 +15,7 @@ export default function PagesTable({ title, sitePageList }: PagesTableProps) {
         {/* head */}
         <thead>
           <tr>
-            <th>
-              <label>
-                <input
-                  onChange={() => setAllChecked(!allChecked)}
-                  type='checkbox'
-                  className='checkbox'
-                />
-              </label>
-            </th>
+            <th></th>
             <th>Page Name</th>
             <th>Page Status</th>
             <th>Url</th>
@@ -52,7 +41,12 @@ export default function PagesTable({ title, sitePageList }: PagesTableProps) {
                 <td>{page.currentState}</td>
                 <td>{page.url}</td>
                 <th>
-                  <button onClick={() => copySinglePage(page)} className='btn btn-primary btn-xs'>Copy Page</button>
+                  <button
+                    onClick={() => copySinglePage(page)}
+                    className='btn btn-primary btn-xs'
+                  >
+                    Copy Page
+                  </button>
                 </th>
               </tr>
             ))}
