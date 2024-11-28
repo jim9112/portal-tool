@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Input from '../components/Input';
 import Tab from '../components/Tab';
 import BulkPageForm from './_components/BulkPageForm';
@@ -10,6 +10,14 @@ export default function Page() {
     fromPortal: '',
     toPortal: '',
   });
+
+  useEffect(() => {
+    const keys = localStorage.getItem('portalKeys');
+    if (keys) {
+      setPortalKeys(JSON.parse(keys));
+    }
+  }, []);
+
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
     localStorage.setItem('portalKeys', JSON.stringify(portalKeys));
@@ -25,6 +33,7 @@ export default function Page() {
             }
             name='fromPortal'
             label='Starting Portal'
+            isRequired={true}
           />
           <Input
             onChangeCallback={(e) =>
@@ -32,6 +41,7 @@ export default function Page() {
             }
             name='toPortal'
             label='Destination Portal'
+            isRequired={true}
           />
         </div>
         <div className='flex justify-center mt-4 mb-4'>
