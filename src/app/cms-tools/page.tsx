@@ -1,9 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Input from '../components/Input';
-import Tab from '../components/Tab';
-import BulkPageForm from './_components/BulkPageForm';
-import SinglePagesTab from './_components/SinglePagesTab';
+import Input from '@/app/components/Input';
+import Tab from '@/app/components/Tab';
+import BulkPageForm from '@/app/cms-tools/_components/BulkPageForm';
+import SinglePagesTab from '@/app/cms-tools/_components/SinglePagesTab';
 export default function Page() {
   interface FormEvent extends React.FormEvent<HTMLFormElement> {}
   const [portalKeys, setPortalKeys] = useState({
