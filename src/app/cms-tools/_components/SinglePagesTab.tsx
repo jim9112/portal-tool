@@ -1,9 +1,7 @@
 import { useState, useActionState } from 'react';
 import { getAllPages } from '../../actions/cms-copy';
-import GetPagesForm from './GetPagesForm';
 import PagesTable from './PagesTable';
 import Modal from '@/app/components/Modal';
-import Input from '@/app/components/Input';
 import CheckBox from '@/app/components/CheckBox';
 import { addCmsPages } from '../../actions/cms-copy';
 import Loading from '@/app/components/Loading';
@@ -13,7 +11,14 @@ const initialState = {
   error: '',
 };
 
-export default function SinglePagesTab() {
+interface SinglePagesTabProps {
+  portalKeys: {
+    fromPortal: string;
+    toPortal: string;
+  };
+}
+
+export default function SinglePagesTab({ portalKeys }: SinglePagesTabProps) {
   const [sitePageList, setSitePageList] = useState([]);
   const [lpPageList, setLpPageList] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -24,10 +29,10 @@ export default function SinglePagesTab() {
     initialState
   );
   // grab all landing pages and website pages from portal
-  const generatePageList = async (portalToken: string) => {
-    const siteData = await getAllPages(portalToken, true);
+  const generatePageList = async () => {
+    const siteData = await getAllPages(portalKeys.fromPortal, true);
     setSitePageList(siteData.results);
-    const lpData = await getAllPages(portalToken, false);
+    const lpData = await getAllPages(portalKeys.fromPortal, false);
     setLpPageList(lpData.results);
   };
   // copy button trigger
@@ -50,7 +55,11 @@ export default function SinglePagesTab() {
         </div>
       )}
       {!sitePageList.length && !lpPageList.length && (
-        <GetPagesForm generatePageList={generatePageList} />
+        <div>
+          <button className='btn btn-accent' onClick={generatePageList}>
+            Get Pages
+          </button>
+        </div>
       )}
       {sitePageList.length > 0 && (
         <PagesTable
@@ -96,11 +105,12 @@ export default function SinglePagesTab() {
                 readOnly
                 value={JSON.stringify(pageData)}
               />
-              <Input
-                label='Destination Portal'
+              <input
+                hidden
+                type='text'
                 name='portalKey'
-                placeholder='Portal Private Key'
-                isRequired={true}
+                readOnly
+                value={portalKeys.toPortal}
               />
               <CheckBox label='Import all as draft' name='allDraft' />
             </div>

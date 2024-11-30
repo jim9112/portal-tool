@@ -32,6 +32,7 @@ export default function Page() {
               setPortalKeys({ ...portalKeys, [e.target.name]: e.target.value })
             }
             name='fromPortal'
+            value={portalKeys.fromPortal}
             label='Starting Portal'
             isRequired={true}
           />
@@ -40,6 +41,7 @@ export default function Page() {
               setPortalKeys({ ...portalKeys, [e.target.name]: e.target.value })
             }
             name='toPortal'
+            value={portalKeys.toPortal}
             label='Destination Portal'
             isRequired={true}
           />
@@ -52,10 +54,10 @@ export default function Page() {
       </form>
       <div role='tablist' className='tabs tabs-lifted'>
         <Tab name='my_tabs_3' label='Bulk Pages Import' defaultChecked>
-          <BulkPageForm />
+          <BulkPageForm portalKeys={portalKeys} />
         </Tab>
         <Tab name='my_tabs_3' label='Single Pages Import'>
-          <SinglePagesTab />
+          <SinglePagesTab portalKeys={portalKeys} />
         </Tab>
       </div>
     </div>

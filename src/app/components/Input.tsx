@@ -5,6 +5,7 @@ interface InputProps {
   name: string;
   onChangeCallback?: (e: any) => void;
   isRequired?: boolean;
+  value?: string;
 }
 
 export default function Input({
@@ -12,6 +13,7 @@ export default function Input({
   type = 'text',
   placeholder,
   name,
+  value,
   isRequired = false,
   onChangeCallback,
 }: InputProps) {
@@ -25,6 +27,7 @@ export default function Input({
         placeholder={placeholder}
         className='input input-bordered w-full max-w-xs'
         name={name}
+        value={value}
         required={isRequired}
         id={name}
         {...(onChangeCallback && {

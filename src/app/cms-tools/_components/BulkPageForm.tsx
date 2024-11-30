@@ -1,14 +1,20 @@
 import { copyCmsPages } from '@/app/actions/cms-copy';
 import { useActionState } from 'react';
-import Input from '@/app/components/Input';
 import CheckBox from '@/app/components/CheckBox';
 import Loading from '@/app/components/Loading';
+
+interface BulkPageFormProps {
+  portalKeys: {
+    fromPortal: string;
+    toPortal: string;
+  };
+}
 
 const initialState = {
   message: '',
   error: '',
 };
-export default function BulkPageForm() {
+export default function BulkPageForm({ portalKeys }: BulkPageFormProps) {
   const [state, formAction, isPending] = useActionState(
     copyCmsPages,
     initialState
@@ -31,17 +37,19 @@ export default function BulkPageForm() {
           </div>
         </div>
         <div className='flex justify-center gap-4'>
-          <Input
-            label='From Portal'
+          <input
+            type='text'
             name='fromPortal'
-            placeholder='Portal Private App Key'
-            isRequired={true}
+            value={portalKeys.fromPortal}
+            hidden
+            readOnly
           />
-          <Input
-            label='To Portal'
+          <input
+            type='text'
             name='toPortal'
-            placeholder='Portal Private App Key'
-            isRequired={true}
+            value={portalKeys.toPortal}
+            hidden
+            readOnly
           />
           <CheckBox label='Import all as draft' name='allDraft' />
         </div>
