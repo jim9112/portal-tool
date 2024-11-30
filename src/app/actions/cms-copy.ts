@@ -105,7 +105,6 @@ export async function addCmsPages(prevState: any, formData: FormData) {
   const parsedData = JSON.parse(data);
   const sitePage = formData.get('sitePage') === 'true' ? true : false;
   const modifiedData = modifyNewPages(parsedData, allDraft);
-
   const message = await addPages(token, modifiedData, sitePage);
 
   return message
