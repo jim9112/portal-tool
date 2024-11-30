@@ -1,4 +1,5 @@
 'use server';
+import { modifyNewPages, Page } from '../lib/pagesTools';
 interface RequestOptions {
   method: string;
   headers: {};
@@ -34,7 +35,11 @@ export const getAllPages = async (token: string, sitePage: boolean) => {
 };
 
 // add pages to destination portal
-export const addPages = async (token: string, pages: [], sitePage: boolean) => {
+export const addPages = async (
+  token: string,
+  pages: Page[],
+  sitePage: boolean
+) => {
   const pageType = sitePage ? 'site-pages' : 'landing-pages';
   const raw = JSON.stringify({
     inputs: pages,
@@ -76,20 +81,7 @@ export async function copyCmsPages(prevState: any, formData: FormData) {
 
   const data = await getAllPages(tokenOne, sitePage);
   if (data) {
-    const modifiedData = data.results.map(
-      (page: {
-        archivedAt: string | undefined;
-        state: string;
-        publishImmediately: boolean;
-      }) => {
-        const pageCopy = { ...page };
-        delete pageCopy.archivedAt;
-        if (allDraft) {
-          pageCopy.state = 'DRAFT';
-        }
-        return pageCopy;
-      }
-    );
+    const modifiedData = modifyNewPages(data.results, allDraft);
     const message = await addPages(tokenTwo, modifiedData, sitePage);
     return message
       ? { message: 'success', error: '' }
@@ -112,21 +104,7 @@ export async function addCmsPages(prevState: any, formData: FormData) {
   const data = formData.get('data') as any;
   const parsedData = JSON.parse(data);
   const sitePage = formData.get('sitePage') === 'true' ? true : false;
-  const modifiedData = parsedData?.map(
-    (page: {
-      archivedAt: string | undefined;
-      state: string;
-      publishImmediately: boolean;
-    }) => {
-      const pageCopy = { ...page };
-      delete pageCopy.archivedAt;
-      if (allDraft) {
-        pageCopy.state = 'DRAFT';
-      }
-      return pageCopy;
-    }
-  );
-
+  const modifiedData = modifyNewPages(parsedData, allDraft);
   const message = await addPages(token, modifiedData, sitePage);
 
   return message
