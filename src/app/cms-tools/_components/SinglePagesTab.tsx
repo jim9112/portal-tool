@@ -41,26 +41,16 @@ export default function SinglePagesTab({ portalKeys }: SinglePagesTabProps) {
     setPageData([page]);
     setSitePage(sitePage);
   };
-  const clearResults = () => {
-    setSitePageList([]);
-    setLpPageList([]);
-  };
   return (
     <>
-      {sitePageList.length > 0 && lpPageList.length > 0 && (
-        <div>
-          <button className='btn btn-accent' onClick={clearResults}>
-            Clear Results
-          </button>
-        </div>
-      )}
-      {!sitePageList.length && !lpPageList.length && (
-        <div>
-          <button className='btn btn-accent' onClick={generatePageList}>
-            Get Pages
-          </button>
-        </div>
-      )}
+      <div>
+        <button className='btn btn-accent' onClick={generatePageList}>
+          {!sitePageList.length && !lpPageList.length
+            ? 'Get Pages'
+            : 'Refresh Pages'}
+        </button>
+      </div>
+
       {sitePageList.length > 0 && (
         <PagesTable
           title='Website Pages'
