@@ -4,6 +4,7 @@ import Input from '@/app/components/Input';
 import Tab from '@/app/components/Tab';
 import BulkPageForm from '@/app/cms-tools/_components/BulkPageForm';
 import SinglePagesTab from '@/app/cms-tools/_components/SinglePagesTab';
+import DestinationPagesTab from './_components/DestinationPagesTab';
 export default function Page() {
   interface FormEvent extends React.FormEvent<HTMLFormElement> {}
   const [portalKeys, setPortalKeys] = useState({
@@ -58,6 +59,9 @@ export default function Page() {
         </Tab>
         <Tab name='my_tabs_3' label='Single Pages Import'>
           <SinglePagesTab portalKeys={portalKeys} />
+        </Tab>
+        <Tab name='my_tabs_3' label='Destination Portal'>
+          <DestinationPagesTab portalKeys={portalKeys} />
         </Tab>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { useState, useActionState } from 'react';
-import PagesTable from '@/app/cms-tools/_components/PagesTable';
+import SinglePagesTable from '@/app/cms-tools/_components/SinglePagesTable';
 import Modal from '@/app/components/Modal';
 import CheckBox from '@/app/components/CheckBox';
 import { addCmsPages, getAllPages } from '@/app/actions/cms-copy';
@@ -51,17 +51,17 @@ export default function SinglePagesTab({ portalKeys }: SinglePagesTabProps) {
       </div>
 
       {sitePageList.length > 0 && (
-        <PagesTable
+        <SinglePagesTable
           title='Website Pages'
           sitePageList={sitePageList}
-          triggerCopy={triggerCopy}
+          rowCta={triggerCopy}
         />
       )}
       {lpPageList.length > 0 && (
-        <PagesTable
+        <SinglePagesTable
           title='Landing Pages'
           sitePageList={lpPageList}
-          triggerCopy={triggerCopy}
+          rowCta={triggerCopy}
           sitePage={false}
         />
       )}

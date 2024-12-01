@@ -1,21 +1,20 @@
 import { useState } from 'react';
-
-interface PagesTableProps {
-  title: string;
-  sitePageList: Array<any>;
-  triggerCopy: (page: { name: string }, sitePage: boolean) => void;
-  sitePage?: boolean;
+interface Page {
+  id: string;
+  name: string;
+  currentState: string;
+  url: string;
 }
 
-export default function PagesTable({
-  title,
+interface DestinationPagesTableProps {
+  sitePageList: Page[];
+  title: string;
+}
+
+export default function DestinationPagesTable({
   sitePageList,
-  triggerCopy,
-  sitePage = true,
-}: PagesTableProps) {
-  const copySinglePage = (page: { name: string }) => {
-    triggerCopy(page, sitePage);
-  };
+  title,
+}: DestinationPagesTableProps) {
   const [pageNumber, setPageNumber] = useState(1);
   return (
     <div className='overflow-x-auto mt-7'>
@@ -27,7 +26,6 @@ export default function PagesTable({
             <th>Page Name</th>
             <th>Page Status</th>
             <th>Url</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -45,14 +43,6 @@ export default function PagesTable({
                   </th>
                   <td>{page.currentState}</td>
                   <td>{page.url}</td>
-                  <th>
-                    <button
-                      onClick={() => copySinglePage(page)}
-                      className='btn btn-primary btn-xs'
-                    >
-                      Copy Page
-                    </button>
-                  </th>
                 </tr>
               ))}
         </tbody>
