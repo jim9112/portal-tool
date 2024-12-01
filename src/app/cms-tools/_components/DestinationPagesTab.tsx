@@ -20,7 +20,6 @@ export default function DestinationPagesTab({
   };
   return (
     <div>
-      <h2>Destination Portal</h2>
       <button className='btn btn-accent' onClick={generatePageList}>
         {!sitePageList.length && !lpPageList.length
           ? 'Get Pages'
