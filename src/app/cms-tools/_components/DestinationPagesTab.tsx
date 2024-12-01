@@ -6,7 +6,6 @@ interface DestinationPagesTabProps {
   };
 }
 import { getAllPages } from '@/app/actions/cms-copy';
-import PagesTable from './SinglePagesTable';
 export default function DestinationPagesTab({
   portalKeys,
 }: DestinationPagesTabProps) {
