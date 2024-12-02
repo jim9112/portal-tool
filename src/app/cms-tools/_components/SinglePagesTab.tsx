@@ -2,7 +2,7 @@ import { useState, useActionState } from 'react';
 import SinglePagesTable from '@/app/cms-tools/_components/SinglePagesTable';
 import Modal from '@/app/components/Modal';
 import CheckBox from '@/app/components/CheckBox';
-import { addCmsPages, getAllPages } from '@/app/actions/cms-copy';
+import { addCmsPages } from '@/app/actions/cms-copy';
 import Loading from '@/app/components/Loading';
 import useGetAllPages from '@/app/cms-tools/_hooks/useGetAllPages';
 const initialState = {

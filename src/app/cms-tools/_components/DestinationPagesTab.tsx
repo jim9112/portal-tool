@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import DestinationPagesTable from './DestinationPagesTable';
 import useGetAllPages from '../_hooks/useGetAllPages';
 interface DestinationPagesTabProps {
@@ -6,7 +5,6 @@ interface DestinationPagesTabProps {
     toPortal: string;
   };
 }
-import { getAllPages } from '@/app/actions/cms-copy';
 export default function DestinationPagesTab({
   portalKeys,
 }: DestinationPagesTabProps) {
