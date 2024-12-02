@@ -26,6 +26,12 @@ export default function Page() {
   return (
     <div className='container mx-auto font-body pt-20'>
       <h1 className='text-3xl font-heading text-center mb-10'>CMS Tools</h1>
+      {!portalKeys.fromPortal ||
+        (!portalKeys.toPortal && (
+          <p className='text-center mb-4 text-accent'>
+            To get started enter the portal keys for both portals and hit save.
+          </p>
+        ))}
       <form className='flex flex-col justify-center' onSubmit={handleSubmit}>
         <div className='flex justify-center gap-4'>
           <Input
@@ -53,17 +59,19 @@ export default function Page() {
           </button>
         </div>
       </form>
-      <div role='tablist' className='tabs tabs-lifted'>
-        <Tab name='my_tabs_3' label='Bulk Pages Import' defaultChecked>
-          <BulkPageForm portalKeys={portalKeys} />
-        </Tab>
-        <Tab name='my_tabs_3' label='Single Pages Import'>
-          <SinglePagesTab portalKeys={portalKeys} />
-        </Tab>
-        <Tab name='my_tabs_3' label='Destination Portal'>
-          <DestinationPagesTab portalKeys={portalKeys} />
-        </Tab>
-      </div>
+      {portalKeys.fromPortal && portalKeys.toPortal && (
+        <div role='tablist' className='tabs tabs-lifted'>
+          <Tab name='my_tabs_3' label='Bulk Pages Import' defaultChecked>
+            <BulkPageForm portalKeys={portalKeys} />
+          </Tab>
+          <Tab name='my_tabs_3' label='Single Pages Import'>
+            <SinglePagesTab portalKeys={portalKeys} />
+          </Tab>
+          <Tab name='my_tabs_3' label='Destination Portal'>
+            <DestinationPagesTab portalKeys={portalKeys} />
+          </Tab>
+        </div>
+      )}
     </div>
   );
 }
