@@ -4,7 +4,7 @@ import Modal from '@/app/components/Modal';
 import CheckBox from '@/app/components/CheckBox';
 import { addCmsPages, getAllPages } from '@/app/actions/cms-copy';
 import Loading from '@/app/components/Loading';
-
+import useGetAllPages from '@/app/cms-tools/_hooks/useGetAllPages';
 const initialState = {
   message: '',
   error: '',
@@ -18,8 +18,9 @@ interface SinglePagesTabProps {
 }
 
 export default function SinglePagesTab({ portalKeys }: SinglePagesTabProps) {
-  const [sitePageList, setSitePageList] = useState([]);
-  const [lpPageList, setLpPageList] = useState([]);
+  const { sitePageList, lpPageList, generatePageList } = useGetAllPages(
+    portalKeys.fromPortal
+  );
   const [showModal, setShowModal] = useState(false);
   const [pageData, setPageData] = useState<{ name: string }[]>([]);
   const [sitePage, setSitePage] = useState(true);
@@ -27,13 +28,6 @@ export default function SinglePagesTab({ portalKeys }: SinglePagesTabProps) {
     addCmsPages,
     initialState
   );
-  // grab all landing pages and website pages from portal
-  const generatePageList = async () => {
-    const siteData = await getAllPages(portalKeys.fromPortal, true);
-    setSitePageList(siteData.results);
-    const lpData = await getAllPages(portalKeys.fromPortal, false);
-    setLpPageList(lpData.results);
-  };
   // copy button trigger
   const triggerCopy = (page: { name: string }, sitePage: boolean) => {
     setShowModal(true);
