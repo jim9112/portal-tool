@@ -67,6 +67,9 @@ export default function Page() {
           <Tab name='my_tabs_3' label='Single Pages Import'>
             <SinglePagesTab portalKeys={portalKeys} />
           </Tab>
+          <Tab name='my_tabs_3' label='Manage Images'>
+            <p>Manage Images</p>
+          </Tab>
           <Tab name='my_tabs_3' label='Destination Portal'>
             <DestinationPagesTab portalKeys={portalKeys} />
           </Tab>
