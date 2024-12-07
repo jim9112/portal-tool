@@ -1,5 +1,5 @@
 'use server';
-import { modifyNewPages, Page } from '@/app/lib/pagesTools';
+import { modifyNewPages, Page } from '@/app/utilities/pagesTools';
 interface RequestOptions {
   method: string;
   headers: {};

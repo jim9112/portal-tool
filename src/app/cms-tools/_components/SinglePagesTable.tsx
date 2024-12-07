@@ -16,39 +16,28 @@ export default function SinglePagesTable({
   const copySinglePage = (page: { name: string }) => {
     rowCta(page, sitePage);
   };
-  const importImages = (page: { name: string }) => {
-    function findNestedImages(obj: {}) {
-      const images: String[] = [];
 
-      function search(obj: any) {
-        // Check if the current object is indeed an object
-        if (obj !== null && (typeof obj === 'object' || Array.isArray(obj))) {
-          // If the object has the key "img", add it to the images array
-          if (typeof obj === 'object' && obj.hasOwnProperty('img')) {
-            // if images doesnt contain the image src, add it
-            if (!images.includes(obj.img.src)) {
-              images.push(obj.img.src);
-            }
-          }
-          // Search through all elements in the array
-          if (Array.isArray(obj)) {
-            obj.forEach((element) => search(element));
-          } else {
-            // Recursively search through all keys in the object
-            for (const key in obj) {
-              if (obj.hasOwnProperty(key)) {
-                search(obj[key]);
-              }
+  const importImages = (page: { name: string }) => {
+    function extractImageUrls(layoutSections: any): string[] {
+      const imageUrls: string[] = [];
+
+      function searchForImages(obj: any) {
+        if (obj && typeof obj === 'object') {
+          for (const key in obj) {
+            if (key === 'src' && typeof obj[key] === 'string') {
+              imageUrls.push(obj[key]);
+            } else {
+              searchForImages(obj[key]);
             }
           }
         }
       }
 
-      search(obj);
-      return images;
+      searchForImages(layoutSections);
+      return imageUrls;
     }
-    const images = findNestedImages(page);
-    console.log(images);
+    const imageUrls = extractImageUrls(page.layoutSections);
+    console.log(imageUrls);
   };
   const [pageNumber, setPageNumber] = useState(1);
   return (
