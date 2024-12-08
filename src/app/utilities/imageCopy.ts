@@ -1,4 +1,4 @@
-function extractImageUrls(layoutSections: any): string[] {
+export function extractImageUrls(layoutSections: any): string[] {
   const imageUrls: string[] = [];
 
   function searchForImages(obj: any) {
@@ -16,6 +16,3 @@ function extractImageUrls(layoutSections: any): string[] {
   searchForImages(layoutSections);
   return imageUrls;
 }
-
-const imageUrls = extractImageUrls(layoutSections);
-console.log(imageUrls);

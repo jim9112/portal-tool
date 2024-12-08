@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { extractImageUrls } from '@/app/utilities/imageCopy';
 import Pagination from '@/app/components/Pagination';
 interface PagesTableProps {
   title: string;
@@ -17,25 +18,7 @@ export default function SinglePagesTable({
     rowCta(page, sitePage);
   };
 
-  const importImages = (page: { name: string }) => {
-    function extractImageUrls(layoutSections: any): string[] {
-      const imageUrls: string[] = [];
-
-      function searchForImages(obj: any) {
-        if (obj && typeof obj === 'object') {
-          for (const key in obj) {
-            if (key === 'src' && typeof obj[key] === 'string') {
-              imageUrls.push(obj[key]);
-            } else {
-              searchForImages(obj[key]);
-            }
-          }
-        }
-      }
-
-      searchForImages(layoutSections);
-      return imageUrls;
-    }
+  const importImages = (page: { layoutSections: {} }) => {
     const imageUrls = extractImageUrls(page.layoutSections);
     console.log(imageUrls);
   };
