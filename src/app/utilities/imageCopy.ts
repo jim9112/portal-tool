@@ -1,4 +1,4 @@
-export function extractImageUrls(layoutSections: any): string[] {
+export function extractImageUrls(layoutSections: any): Array<string> {
   const imageUrls: string[] = [];
 
   function searchForImages(obj: any) {

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { extractImageUrls } from '@/app/utilities/imageCopy';
 import Pagination from '@/app/components/Pagination';
+import Modal from '@/app/components/Modal';
 interface PagesTableProps {
   title: string;
   sitePageList: Array<Page>;
-  rowCta: (page: { name: string }, sitePage: boolean) => void;
+  rowCta: (page: Page, sitePage: boolean) => void;
   sitePage?: boolean;
 }
 interface Page {
@@ -23,11 +24,15 @@ export default function SinglePagesTable({
   const copySinglePage = (page: Page) => {
     rowCta(page, sitePage);
   };
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const importImages = (page: Page) => {
-    const imageUrls = extractImageUrls(page.layoutSections);
+    const imageList = extractImageUrls(page.layoutSections);
+    setImageUrls(imageList);
+    setOpenModal(true);
     console.log(imageUrls);
   };
   const [pageNumber, setPageNumber] = useState(1);
+  const [openModal, setOpenModal] = useState(false);
   return (
     <div className='overflow-x-auto mt-7'>
       <h3 className='text-xl text-center'>{title}</h3>
@@ -81,6 +86,25 @@ export default function SinglePagesTable({
         pageNumber={pageNumber}
         setPageNumber={setPageNumber}
       />
+      {openModal && (
+        <Modal>
+          <div>
+            {imageUrls.map((url, index) => (
+              <div key={index}>
+                <a href={url} target='_blank'>
+                  {url}
+                </a>
+              </div>
+            ))}
+          </div>
+          <button
+            onClick={() => setOpenModal(false)}
+            className='btn btn-primary btn-xs'
+          >
+            Close
+          </button>
+        </Modal>
+      )}
     </div>
   );
 }
