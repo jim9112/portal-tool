@@ -3,22 +3,27 @@ import { extractImageUrls } from '@/app/utilities/imageCopy';
 import Pagination from '@/app/components/Pagination';
 interface PagesTableProps {
   title: string;
-  sitePageList: Array<any>;
+  sitePageList: Array<Page>;
   rowCta: (page: { name: string }, sitePage: boolean) => void;
   sitePage?: boolean;
 }
-
+interface Page {
+  id: string;
+  name: string;
+  currentState: string;
+  url: string;
+  layoutSections: {};
+}
 export default function SinglePagesTable({
   title,
   sitePageList,
   rowCta,
   sitePage = true,
 }: PagesTableProps) {
-  const copySinglePage = (page: { name: string }) => {
+  const copySinglePage = (page: Page) => {
     rowCta(page, sitePage);
   };
-
-  const importImages = (page: { layoutSections: {} }) => {
+  const importImages = (page: Page) => {
     const imageUrls = extractImageUrls(page.layoutSections);
     console.log(imageUrls);
   };
@@ -27,7 +32,6 @@ export default function SinglePagesTable({
     <div className='overflow-x-auto mt-7'>
       <h3 className='text-xl text-center'>{title}</h3>
       <table className='table'>
-        {/* head */}
         <thead>
           <tr>
             <th>Page Name</th>
@@ -41,7 +45,7 @@ export default function SinglePagesTable({
           {sitePageList.length > 0 &&
             sitePageList
               .slice(pageNumber * 5 - 5, pageNumber * 5)
-              .map((page, index) => (
+              .map((page) => (
                 <tr key={page.id}>
                   <th>
                     <div className='flex items-center gap-3'>
