@@ -29,7 +29,6 @@ export default function SinglePagesTable({
     const imageList = extractImageUrls(page.layoutSections);
     setImageUrls(imageList);
     setOpenModal(true);
-    console.log(imageUrls);
   };
   const [pageNumber, setPageNumber] = useState(1);
   const [openModal, setOpenModal] = useState(false);
