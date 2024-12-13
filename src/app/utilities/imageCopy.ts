@@ -4,7 +4,11 @@ export function extractImageUrls(layoutSections: any): Array<string> {
   function searchForImages(obj: any) {
     if (obj && typeof obj === 'object') {
       for (const key in obj) {
-        if (key === 'src' && typeof obj[key] === 'string') {
+        if (
+          key === 'src' &&
+          typeof obj[key] === 'string' &&
+          !imageUrls.includes(obj[key])
+        ) {
           imageUrls.push(obj[key]);
         } else {
           searchForImages(obj[key]);

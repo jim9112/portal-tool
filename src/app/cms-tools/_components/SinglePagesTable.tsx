@@ -90,10 +90,11 @@ export default function SinglePagesTable({
         <Modal>
           <div>
             {imageUrls.map((url, index) => (
-              <div key={index}>
+              <div className='flex items-center justify-between' key={index}>
                 <a href={url} target='_blank'>
                   {url}
                 </a>
+                <button className='btn btn-secondary btn-xs'>Copy Image</button>
               </div>
             ))}
           </div>
