@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { H1 } from '@/app/components/Headings';
+import { H1 } from '@/app/components/Typography';
 import Input from '@/app/components/Input';
 import Tab from '@/app/components/Tab';
 import BulkPageForm from '@/app/cms-tools/_components/BulkPageForm';

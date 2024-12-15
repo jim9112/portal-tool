@@ -1,4 +1,4 @@
-import { H1 } from '@/app/components/Headings';
+import { H1 } from '@/app/components/Typography';
 export default function Page() {
   return (
     <div className='container mx-auto text-center'>
