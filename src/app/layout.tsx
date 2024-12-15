@@ -40,6 +40,9 @@ export default function RootLayout({
             <li className='hover:hover:text-accent'>
               <Link href='/cms-tools'>CMS Tools</Link>
             </li>
+            <li className='hover:hover:text-accent'>
+              <Link href='/email-tools'>Email Tools</Link>
+            </li>
           </ul>
         </header>
         {children}

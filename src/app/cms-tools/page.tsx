@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { H1 } from '@/app/components/Headings';
 import Input from '@/app/components/Input';
 import Tab from '@/app/components/Tab';
 import BulkPageForm from '@/app/cms-tools/_components/BulkPageForm';
@@ -25,7 +26,7 @@ export default function Page() {
   };
   return (
     <div className='container mx-auto font-body pt-20'>
-      <h1 className='text-3xl font-heading text-center mb-10'>CMS Tools</h1>
+      <H1>CMS Tools</H1>
       {!portalKeys.fromPortal ||
         (!portalKeys.toPortal && (
           <p className='text-center mb-4 text-accent'>
