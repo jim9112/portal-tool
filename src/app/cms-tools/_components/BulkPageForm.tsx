@@ -1,20 +1,20 @@
 import { copyCmsPages } from '@/app/actions/cms-copy';
-import { useActionState } from 'react';
+import { useActionState, useContext } from 'react';
 import CheckBox from '@/app/components/CheckBox';
 import Loading from '@/app/components/Loading';
-
-interface BulkPageFormProps {
-  portalKeys: {
-    fromPortal: string;
-    toPortal: string;
-  };
-}
+import { PortalKeyContext } from '@/app/cms-tools/_context/PortalKeyContext';
 
 const initialState = {
   message: '',
   error: '',
 };
-export default function BulkPageForm({ portalKeys }: BulkPageFormProps) {
+interface PortalKeys {
+  fromPortal?: string;
+  toPortal?: string;
+}
+
+export default function BulkPageForm() {
+  const portalKeys: PortalKeys = useContext(PortalKeyContext);
   const [state, formAction, isPending] = useActionState(
     copyCmsPages,
     initialState

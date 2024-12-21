@@ -1,4 +1,5 @@
-import { useState, useActionState } from 'react';
+import { useState, useActionState, useContext } from 'react';
+import { PortalKeyContext } from '../_context/PortalKeyContext';
 import SinglePagesTable from '@/app/cms-tools/_components/SinglePagesTable';
 import Modal from '@/app/components/Modal';
 import CheckBox from '@/app/components/CheckBox';
@@ -10,14 +11,13 @@ const initialState = {
   error: '',
 };
 
-interface SinglePagesTabProps {
-  portalKeys: {
-    fromPortal: string;
-    toPortal: string;
-  };
+interface PortalKeys {
+  fromPortal: string;
+  toPortal: string;
 }
 
-export default function SinglePagesTab({ portalKeys }: SinglePagesTabProps) {
+export default function SinglePagesTab() {
+  const portalKeys: PortalKeys = useContext(PortalKeyContext);
   const { sitePageList, lpPageList, generatePageList } = useGetAllPages(
     portalKeys.fromPortal
   );

@@ -1,13 +1,9 @@
+import { useContext } from 'react';
+import { PortalKeyContext } from '../_context/PortalKeyContext';
 import DestinationPagesTable from './DestinationPagesTable';
 import useGetAllPages from '../_hooks/useGetAllPages';
-interface DestinationPagesTabProps {
-  portalKeys: {
-    toPortal: string;
-  };
-}
-export default function DestinationPagesTab({
-  portalKeys,
-}: DestinationPagesTabProps) {
+export default function DestinationPagesTab() {
+  const portalKeys = useContext(PortalKeyContext);
   const { sitePageList, lpPageList, generatePageList } = useGetAllPages(
     portalKeys.toPortal
   );
