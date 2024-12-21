@@ -71,3 +71,14 @@ export const uploadStatus = async (token: string, uploadId: string) => {
     }
   }
 };
+export const copyAllFiles = async (url: string) => {
+  let imgUrl = url;
+  if (!url.includes('htt')) {
+    imgUrl = `https:${url}`;
+  }
+  return imgUrl;
+  // get the portal keys and date
+  // send the download request
+  // check to see the status of the download
+  // return the new url of the image
+};

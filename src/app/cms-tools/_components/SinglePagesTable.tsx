@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { extractImageUrls } from '@/app/utilities/imageCopy';
 import Pagination from '@/app/components/Pagination';
 import Modal from '@/app/components/Modal';
+import { copyAllFiles } from '@/app/actions/file-copy';
 interface PagesTableProps {
   title: string;
   sitePageList: Array<Page>;
@@ -25,10 +26,16 @@ export default function SinglePagesTable({
     rowCta(page, sitePage);
   };
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  // grab a list of image urls from the page layout ***This will be moved***
   const importImages = (page: Page) => {
     const imageList = extractImageUrls(page.layoutSections);
     setImageUrls(imageList);
     setOpenModal(true);
+  };
+  // download the images from the list of urls ***This will be moved***
+  const downloadImages = async (url: string) => {
+    const data = await copyAllFiles(url);
+    console.log(data);
   };
   const [pageNumber, setPageNumber] = useState(1);
   const [openModal, setOpenModal] = useState(false);
@@ -93,7 +100,12 @@ export default function SinglePagesTable({
                 <a href={url} target='_blank'>
                   {url}
                 </a>
-                <button className='btn btn-secondary btn-xs'>Copy Image</button>
+                <button
+                  className='btn btn-secondary btn-xs'
+                  onClick={() => downloadImages(url)}
+                >
+                  Copy Image
+                </button>
               </div>
             ))}
           </div>
