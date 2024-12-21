@@ -1,3 +1,4 @@
+'use server';
 export const uploadFile = async (
   token: string,
   url: string,
@@ -71,11 +72,18 @@ export const uploadStatus = async (token: string, uploadId: string) => {
     }
   }
 };
-export const copyAllFiles = async (url: string) => {
+export const copyAllFiles = async (url: string, toPortalKey: string) => {
   let imgUrl = url;
   if (!url.includes('htt')) {
     imgUrl = `https:${url}`;
   }
+  const data = await uploadFile(
+    toPortalKey,
+    imgUrl,
+    'Test Upload',
+    'Test Image'
+  );
+  console.log(data);
   return imgUrl;
   // get the portal keys and date
   // send the download request

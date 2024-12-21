@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { PortalKeyContext } from '../_context/PortalKeyContext';
 import { extractImageUrls } from '@/app/utilities/imageCopy';
 import Pagination from '@/app/components/Pagination';
 import Modal from '@/app/components/Modal';
@@ -22,6 +23,7 @@ export default function SinglePagesTable({
   rowCta,
   sitePage = true,
 }: PagesTableProps) {
+  const portalKeys = useContext(PortalKeyContext);
   const copySinglePage = (page: Page) => {
     rowCta(page, sitePage);
   };
@@ -34,7 +36,7 @@ export default function SinglePagesTable({
   };
   // download the images from the list of urls ***This will be moved***
   const downloadImages = async (url: string) => {
-    const data = await copyAllFiles(url);
+    const data = await copyAllFiles(url, portalKeys.toPortal);
     console.log(data);
   };
   const [pageNumber, setPageNumber] = useState(1);
