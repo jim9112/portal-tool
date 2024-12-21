@@ -77,16 +77,19 @@ export const copyAllFiles = async (url: string, toPortalKey: string) => {
   if (!url.includes('htt')) {
     imgUrl = `https:${url}`;
   }
+  // get the portal keys and date
+  // send the download request
+  // To Do: Dynamically create different names for the images
+  // To Do: Dynamically create different folder names for the images
   const data = await uploadFile(
     toPortalKey,
     imgUrl,
     'Test Upload',
-    'Test Image'
+    'Test Image 2'
   );
-  console.log(data);
-  return imgUrl;
-  // get the portal keys and date
-  // send the download request
   // check to see the status of the download
+  const uploadStatusData = await uploadStatus(toPortalKey, data.id);
+  console.log(uploadStatusData);
+  return imgUrl;
   // return the new url of the image
 };
